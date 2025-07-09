@@ -1,20 +1,41 @@
-// 50-Problem-Solving-Tasks-Level-3.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <cstdlib>
+using namespace std;
+
+int GenerateRandomNumber(int From, int To){
+    int RandomNumber = rand() % (To - From + 1) + From;
+	return RandomNumber;
+}
+
+void generateRandomMatrix3x3(int matrix[3][3]) {
+    
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            matrix[i][j] = GenerateRandomNumber(1, 100);
+        }
+    }
+}
+
+void displayMatrix3x3(int matrix[3][3]){
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++)
+        {
+            cout << matrix[i][j] << "\t";
+        }
+        cout << endl;
+    }
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    srand((unsigned)time(NULL));
+    int matrix[3][3];
+
+    generateRandomMatrix3x3(matrix);
+
+    cout << "The following is a 3X3 random matrix: \n";
+    displayMatrix3x3(matrix);
+
+    return 0;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
