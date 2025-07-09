@@ -27,21 +27,28 @@ void displayMatrix3x3(int matrix[3][3], short Rows, short Cols){
     }
 }
 
-void displayRowSums(int matrix[3][3], short Rows, short Cols){
-    int sum = 0;
-    for (int i = 0; i < Rows; i++) {
-        for (int j = 0; j < Cols; j++) {
-            sum += matrix[i][j];
-        }
-        cout << " Row " << (i + 1) << " Sum = " << sum << endl;
-        sum = 0;
+int RowSum(int matrix[3][3], short RowNumber, short Cols) {
+    int Sum = 0;
+
+    for (short j = 0; j <= Cols - 1; j++) {
+        Sum += matrix[RowNumber][j];
+    }
+    return Sum;
+}
+
+void storeRowSumsInArray(int matrix[3][3], short Rows, short Cols, int arr[3]) {
+    cout << "The following are the sum of each row in the matrix: " << endl;
+    for (short i = 0; i < Rows; i++)
+    {
+        arr[i] = RowSum(matrix, i, Cols);
+        cout << " Row " << i + 1 << " Sum = " << arr[i] << endl;
     }
 }
 
 int main()
 {
     srand((unsigned)time(NULL));
-    int matrix[3][3];
+    int matrix[3][3], arr[3];
 
     generateRandomMatrix3x3(matrix, 3, 3);
 
@@ -49,10 +56,8 @@ int main()
     displayMatrix3x3(matrix, 3, 3);
 
 
-    cout << "The following are the sum of each row in the matrix: " << endl;
-    displayRowSums(matrix, 3, 3);
+    storeRowSumsInArray(matrix, 3, 3, arr);
 
     system("pause>0");
-    return 0;
 }
 
