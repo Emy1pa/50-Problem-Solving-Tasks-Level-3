@@ -27,21 +27,22 @@ void displayMatrix3x3(int matrix[3][3], short Rows, short Cols){
     }
 }
 
-int RowSum(int matrix[3][3], short RowNumber, short Cols) {
+int ColumnSum(int matrix[3][3], short Rows, short ColNumber) {
     int Sum = 0;
 
-    for (short j = 0; j <= Cols - 1; j++) {
-        Sum += matrix[RowNumber][j];
+    for (short i = 0; i <= Rows - 1; i++) {
+        Sum += matrix[i][ColNumber];
     }
     return Sum;
 }
 
-void storeRowSumsInArray(int matrix[3][3], short Rows, short Cols, int arr[3]) {
-    cout << "The following are the sum of each row in the matrix: " << endl;
-    for (short i = 0; i < Rows; i++)
+
+
+void PrintColumnsSum(int matrix[3][3], short Rows, short Cols) {
+    cout << "The following are the sum of each column in the matrix: " << endl;
+    for (short j = 0; j < Cols; j++)
     {
-        arr[i] = RowSum(matrix, i, Cols);
-        cout << " Row " << i + 1 << " Sum = " << arr[i] << endl;
+        cout << " Col " << j + 1 << " Sum = " << ColumnSum(matrix, Rows, j) << endl;
     }
 }
 
@@ -56,7 +57,7 @@ int main()
     displayMatrix3x3(matrix, 3, 3);
 
 
-    storeRowSumsInArray(matrix, 3, 3, arr);
+    PrintColumnsSum(matrix, 3, 3);
 
     system("pause>0");
 }
