@@ -3,71 +3,40 @@
 #include <iomanip>
 using namespace std;
 
-int GenerateRandomNumber(int From, int To){
-    int RandomNumber = rand() % (To - From + 1) + From;
-	return RandomNumber;
+void fillMatrixWithOrderedNumbers(int arr[3][3], int Rows, int Cols, int &Counter) {
+	Counter = 1;
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++) {
+			arr[i][j] = Counter;
+			Counter++;
+		}
+	}
+
 }
 
-void generateRandomMatrix3x3(int matrix[3][3], short Rows, short Cols) {
-    
-    for (int i = 0; i < Rows; i++) {
-        for (int j = 0; j < Cols; j++) {
-            matrix[i][j] = GenerateRandomNumber(1, 100);
-        }
-    }
+void PrintMatrixOrderedNumbers(int arr[3][3], int rows, int cols) {
+	cout << "The following is a 3x3 ordered matrix: \n";
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			cout << arr[i][j] << "\t";
+		}
+		cout << endl;
+	}
 }
 
-void displayMatrix3x3(int matrix[3][3], short Rows, short Cols){
-    for (int i = 0; i < Rows; i++) {
-        for (int j = 0; j < Cols; j++)
-        {
-            cout << setw(3) << matrix[i][j]  << "\t";
-        }
-        cout << endl;
-    }
-}
-
-int ColumnSum(int matrix[3][3], short Rows, short ColNumber) {
-    int Sum = 0;
-
-    for (short i = 0; i <= Rows - 1; i++) {
-        Sum += matrix[i][ColNumber];
-    }
-    return Sum;
-}
-
-
-
-void AddColumnSumToArray(int matrix[3][3], int arr[3], short Rows, short Cols) {
-    
-    for (int j = 0; j < Cols; j++)
-    {
-        arr[j] = ColumnSum(matrix, Rows, j);
-    }
-}
-
-void PrintColumnsSum(int arr[3], short Cols) {
-    cout << "The following are the sum of each column in the matrix: " << endl;
-    for (short j = 0; j < Cols; j++)
-    {
-        cout << " Col " << j + 1 << " Sum = " << arr[j] << endl;
-    }
-}
 
 int main()
 {
-    srand((unsigned)time(NULL));
-    int matrix[3][3], arr[3];
+	int arr[3][3];
+	int Counter = 0;
 
-    generateRandomMatrix3x3(matrix, 3, 3);
+	fillMatrixWithOrderedNumbers(arr, 3, 3, Counter);
 
-    cout << "The following is a 3X3 random matrix: \n";
-    displayMatrix3x3(matrix, 3, 3);
-
-
-    AddColumnSumToArray(matrix, arr, 3, 3);
-
-    PrintColumnsSum(arr, 3);
+	PrintMatrixOrderedNumbers(arr, 3, 3);
 
     system("pause>0");
 }
