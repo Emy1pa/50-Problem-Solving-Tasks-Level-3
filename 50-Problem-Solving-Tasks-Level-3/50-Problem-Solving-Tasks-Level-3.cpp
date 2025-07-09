@@ -38,11 +38,19 @@ int ColumnSum(int matrix[3][3], short Rows, short ColNumber) {
 
 
 
-void PrintColumnsSum(int matrix[3][3], short Rows, short Cols) {
+void AddColumnSumToArray(int matrix[3][3], int arr[3], short Rows, short Cols) {
+    
+    for (int j = 0; j < Cols; j++)
+    {
+        arr[j] = ColumnSum(matrix, Rows, j);
+    }
+}
+
+void PrintColumnsSum(int arr[3], short Cols) {
     cout << "The following are the sum of each column in the matrix: " << endl;
     for (short j = 0; j < Cols; j++)
     {
-        cout << " Col " << j + 1 << " Sum = " << ColumnSum(matrix, Rows, j) << endl;
+        cout << " Col " << j + 1 << " Sum = " << arr[j] << endl;
     }
 }
 
@@ -57,7 +65,9 @@ int main()
     displayMatrix3x3(matrix, 3, 3);
 
 
-    PrintColumnsSum(matrix, 3, 3);
+    AddColumnSumToArray(matrix, arr, 3, 3);
+
+    PrintColumnsSum(arr, 3);
 
     system("pause>0");
 }
