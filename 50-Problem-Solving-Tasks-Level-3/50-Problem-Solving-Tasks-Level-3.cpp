@@ -22,19 +22,33 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols) {
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++) {
-			cout << setw(3) << arr[i][j] << "\t";
+			cout << setw(4) << arr[i][j] << "\t";
 		}
 		cout << endl;
 	}
 }
 
-void PrintMultiplyOfTwoMatrix(int arr1[3][3], int arr2[3][3], short Rows, short Cols) {
+void PrintMiddleRowOfMatrix(int arr[3][3], short Rows, short Cols) {
+	cout << "Middle Row of Matrix1 is: " << endl;
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++) {
-			arr1[i][j] *= arr2[i][j];
+			if (i == 1) {
+				cout << arr[i][j] << "\t";
+			}
 		}
-		
+	}
+}
+
+void PrintMiddleColumnOfMatrix(int arr[3][3], short Rows, short Cols) {
+	cout << "Middle Column of Matrix1 is: " << endl;
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Cols; j++) {
+			if (j == 1) {
+				cout << arr[i][j] << "\t";
+			}
+		}
 	}
 }
 
@@ -45,23 +59,22 @@ int main()
 {
 	srand((unsigned)time(NULL));
 	
-	int arr1[3][3], arr2[3][3];
+	int arr1[3][3], arrResults[3][3];
 
 	FillMatrixWithRandomNumbers(arr1, 3, 3);
-	FillMatrixWithRandomNumbers(arr2, 3, 3);
 
 	cout << "Matrix 1: \n";
 	PrintMatrix(arr1, 3, 3);
 
 	cout << endl;
 
-	cout << "Matrix 2: \n";
-	PrintMatrix(arr2, 3, 3);
+	
+	PrintMiddleRowOfMatrix(arr1, 3, 3);
+	cout << endl << endl;
+	PrintMiddleColumnOfMatrix(arr1, 3, 3);
 
-	PrintMultiplyOfTwoMatrix(arr1, arr2, 3, 3);
 
-	cout << "Results: \n";
-	PrintMatrix(arr1,  3, 3);
+	
 	
 
 	system("pause>0");
