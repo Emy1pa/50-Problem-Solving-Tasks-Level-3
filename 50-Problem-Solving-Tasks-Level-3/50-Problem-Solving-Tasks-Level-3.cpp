@@ -28,18 +28,21 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols) {
 		cout << endl;
 	}
 }
-bool CheckIfMatrixAreEqual(int arr1[3][3], int arr2[3][3], short Rows, short Cols) {
-
+int SumOfMatrix(int arr[3][3], short Rows, short Cols) {
+	int Sum = 0;
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++) {
-			if (arr1[i][j] != arr2[i][j]) {
-				return false;
-			}
+			Sum += arr[i][j];
 		}
 	}
-	return true;
+	return Sum;
 }
+bool CheckIfMatrixSumAreEqual(int arr1[3][3], int arr2[3][3], short Rows, short Cols) {
+
+	return (SumOfMatrix(arr1, Rows, Cols) == SumOfMatrix(arr2, Rows, Cols));
+}
+
 
 
 
@@ -62,13 +65,12 @@ int main()
 	PrintMatrix(arr2, 3, 3);
 	cout << endl;
 
-	if (CheckIfMatrixAreEqual(arr1, arr2, 3, 3)) {
-		cout << "Yes, both matrix are equal. \n";
+	if (CheckIfMatrixSumAreEqual(arr1, arr2, 3, 3)) {
+		cout << "Yes, both matrix sum are equal. \n";
 	}
 	else {
-		cout << "No, both matrix are not equal. \n";
+		cout << "No, both matrix sum are not equal. \n";
 	}
 
 	system("pause>0");
 }
-
