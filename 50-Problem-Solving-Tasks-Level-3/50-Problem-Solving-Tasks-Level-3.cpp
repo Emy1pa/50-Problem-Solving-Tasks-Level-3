@@ -4,43 +4,34 @@
 
 using namespace std;
 
-int RandomNumber(int From, int To) {
-	int Random = rand() % (To - From + 1);
-	return Random;
-}
 
-void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols) {
-	for (int i = 0; i < Rows; i++)
+
+void PrintMatrix(int arr[3][3], short Rows, short Cols)
+{
+	for (short i = 0; i < Rows; i++)
 	{
-		for (int j = 0; j < Cols; j++) {
-			arr[i][j] = RandomNumber(1, 10);
+		for (short j = 0; j < Cols; j++)
+		{
+			cout << setw(3) << arr[i][j] << " ";
 		}
+		cout << "\n";
 	}
 }
 
-void PrintMatrix(int arr[3][3], short Rows, short Cols) {
+bool CheckIfMatrixIsIdentity(int arr[3][3], short Rows, short Cols) {
 	for (int i = 0; i < Rows; i++)
 	{
-		for (int j = 0; j < Cols; j++) {
-			printf(" %0*d  ", 2, arr[i][j]);
-			//cout << setw(4) << arr[i][j] << "\t";
-		}
-		cout << endl;
-	}
-}
-int SumOfMatrix(int arr[3][3], short Rows, short Cols) {
-	int Sum = 0;
-	for (int i = 0; i < Rows; i++)
-	{
-		for (int j = 0; j < Cols; j++) {
-			Sum += arr[i][j];
+		for (int j = 0; j < Cols; j++)
+		{
+			if (i == j && arr[i][j] != 1) {
+				return false;
+			}
+			else if (i != j && arr[i][j] != 0) {
+				return false;
+			}
 		}
 	}
-	return Sum;
-}
-bool CheckIfMatrixSumAreEqual(int arr1[3][3], int arr2[3][3], short Rows, short Cols) {
-
-	return (SumOfMatrix(arr1, Rows, Cols) == SumOfMatrix(arr2, Rows, Cols));
+	return true;
 }
 
 
@@ -52,25 +43,17 @@ int main()
 {
 	srand((unsigned)time(NULL));
 
-	int arr1[3][3], arr2[3][3];
-
-	FillMatrixWithRandomNumbers(arr1, 3, 3);
-	FillMatrixWithRandomNumbers(arr2, 3, 3);
+	int arr[3][3] = { {1, 0, 0}, {0, 1, 0}, {0, 0, 1} };
 
 	cout << "Matrix 1: \n";
-	PrintMatrix(arr1, 3, 3);
-	cout << endl;
+	PrintMatrix(arr, 3, 3);
 
-	cout << "Matrix 2: \n";
-	PrintMatrix(arr2, 3, 3);
-	cout << endl;
 
-	if (CheckIfMatrixSumAreEqual(arr1, arr2, 3, 3)) {
-		cout << "Yes, both matrix sum are equal. \n";
+	if (CheckIfMatrixIsIdentity(arr, 3, 3)) {
+		cout << "\n Yes, Matrix is Identity \n";
 	}
 	else {
-		cout << "No, both matrix sum are not equal. \n";
+		cout << "\n No, Matrix is not Identity \n";
 	}
-
 	system("pause>0");
 }
