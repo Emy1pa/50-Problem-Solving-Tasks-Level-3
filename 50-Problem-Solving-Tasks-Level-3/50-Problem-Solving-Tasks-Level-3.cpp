@@ -13,7 +13,7 @@ void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols) {
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++) {
-			arr[i][j] = RandomNumber(1, 100);
+			arr[i][j] = RandomNumber(1, 10);
 		}
 	}
 }
@@ -22,35 +22,25 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols) {
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++) {
-			cout << setw(4) << arr[i][j] << "\t";
+			printf(" %0*d  ", 2, arr[i][j]);
+			//cout << setw(4) << arr[i][j] << "\t";
 		}
 		cout << endl;
 	}
 }
 
-void PrintMiddleRowOfMatrix(int arr[3][3], short Rows, short Cols) {
-	cout << "Middle Row of Matrix1 is: " << endl;
+int PrintSumOfMatrix(int arr[3][3], short Rows, short Cols){
+	int sum = 0;
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++) {
-			if (i == 1) {
-				cout << arr[i][j] << "\t";
-			}
+			sum += arr[i][j];
 		}
 	}
+	return sum;
 }
 
-void PrintMiddleColumnOfMatrix(int arr[3][3], short Rows, short Cols) {
-	cout << "Middle Column of Matrix1 is: " << endl;
-	for (int i = 0; i < Rows; i++)
-	{
-		for (int j = 0; j < Cols; j++) {
-			if (j == 1) {
-				cout << arr[i][j] << "\t";
-			}
-		}
-	}
-}
+
 
 
 
@@ -65,16 +55,13 @@ int main()
 
 	cout << "Matrix 1: \n";
 	PrintMatrix(arr1, 3, 3);
-
 	cout << endl;
 
-	
-	PrintMiddleRowOfMatrix(arr1, 3, 3);
-	cout << endl << endl;
-	PrintMiddleColumnOfMatrix(arr1, 3, 3);
-
+	cout << "Sum of Matrix1 is: " << PrintSumOfMatrix(arr1, 3, 3) << endl;
 
 	
+	
+
 	
 
 	system("pause>0");
