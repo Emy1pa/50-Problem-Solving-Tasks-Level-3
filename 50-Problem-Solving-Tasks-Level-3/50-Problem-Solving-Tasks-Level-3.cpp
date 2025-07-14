@@ -4,16 +4,7 @@
 
 using namespace std;
 
-int ReadPositiveNumber(string Message){
-	int Number;
-	do
-	{
-		cout << Message << endl;
-		cin >> Number;
-	} while (Number < 0);
 
-	return Number;
-}
 
 void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
@@ -27,17 +18,21 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-int CountGivenNumberInMatrix(int arr[3][3], short Rows, short Cols, int CheckedNumber) {
-	int Counter = 0;
+bool IsSparseMatrix(int arr[3][3], short Rows, short Cols) {
+	int ZeroCount = 0, OtherCount = 0;
+
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++) {
-			if (arr[i][j] == CheckedNumber) {
-				Counter++;
+			if (arr[i][j] == 0) {
+				ZeroCount++;
+			}
+			else {
+				OtherCount++;
 			}
 		}
 	}
-	return Counter;
+	return ZeroCount > OtherCount;
 }
 
 
@@ -47,17 +42,19 @@ int CountGivenNumberInMatrix(int arr[3][3], short Rows, short Cols, int CheckedN
 
 int main()
 {
-	srand((unsigned)time(NULL));
 
-	int arr[3][3] = { {9, 1, 12}, {0, 9, 1}, {0, 9, 9} };
+	int arr[3][3] = { {0, 0, 12}, {0, 0, 1}, {0, 0, 9} };
 
 	cout << "Matrix 1: \n";
 	PrintMatrix(arr, 3, 3);
 
-
-	int CheckedNumber = ReadPositiveNumber("Enter the number to count in a matrix ?");
-
-	cout << "Number " << CheckedNumber << " count in matrix is " << CountGivenNumberInMatrix(arr, 3, 3, CheckedNumber);
+	if (IsSparseMatrix(arr, 3, 3)) {
+		cout << "Yes: It is Sparse Matrix \n";
+	}
+	else {
+		cout << "No: It is not Sparse Matrix \n";
+	}
+	
 	
 	system("pause>0");
 }
