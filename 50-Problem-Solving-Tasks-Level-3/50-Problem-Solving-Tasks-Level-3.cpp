@@ -4,7 +4,16 @@
 
 using namespace std;
 
+int ReadPositiveNumber(string Message){
+	int Number;
+	do
+	{
+		cout << Message << endl;
+		cin >> Number;
+	} while (Number < 0);
 
+	return Number;
+}
 
 void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
@@ -18,20 +27,17 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-bool CheckIfMatrixIsScalar(int arr[3][3], short Rows, short Cols) {
-	int scalarNumber = arr[0][0];
+int CountGivenNumberInMatrix(int arr[3][3], short Rows, short Cols, int CheckedNumber) {
+	int Counter = 0;
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++) {
-			if (i == j && arr[i][j] != scalarNumber) {
-				return false;
-			}
-			else if (i != j && arr[i][j] != 0) {
-				return false;
+			if (arr[i][j] == CheckedNumber) {
+				Counter++;
 			}
 		}
 	}
-	return true;
+	return Counter;
 }
 
 
@@ -43,17 +49,15 @@ int main()
 {
 	srand((unsigned)time(NULL));
 
-	int arr[3][3] = { {1, 0, 0}, {0, 9, 0}, {0, 0, 1} };
+	int arr[3][3] = { {9, 1, 12}, {0, 9, 1}, {0, 9, 9} };
 
 	cout << "Matrix 1: \n";
 	PrintMatrix(arr, 3, 3);
 
 
-	if (CheckIfMatrixIsScalar(arr, 3, 3)) {
-		cout << "\n Yes, Matrix is Scalar \n";
-	}
-	else {
-		cout << "\n No, Matrix is not Scalar \n";
-	}
+	int CheckedNumber = ReadPositiveNumber("Enter the number to count in a matrix ?");
+
+	cout << "Number " << CheckedNumber << " count in matrix is " << CountGivenNumberInMatrix(arr, 3, 3, CheckedNumber);
+	
 	system("pause>0");
 }
