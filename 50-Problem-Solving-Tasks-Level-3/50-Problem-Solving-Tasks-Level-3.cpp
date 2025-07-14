@@ -18,43 +18,43 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-bool IsSparseMatrix(int arr[3][3], short Rows, short Cols) {
-	int ZeroCount = 0, OtherCount = 0;
-
-	for (int i = 0; i < Rows; i++)
+bool IsNumberExists(int arr[3][3], int Number, short Rows, short Cols) {
+	for (short i = 0; i < Rows; i++)
 	{
-		for (int j = 0; j < Cols; j++) {
-			if (arr[i][j] == 0) {
-				ZeroCount++;
-			}
-			else {
-				OtherCount++;
+		for (short j = 0; j < Cols; j++)
+		{
+			if (arr[i][j] == Number) {
+				return true;
 			}
 		}
 	}
-	return ZeroCount > OtherCount;
+	return false;
+	
 }
-
-
-
 
 
 
 int main()
 {
 
-	int arr[3][3] = { {0, 0, 12}, {0, 0, 1}, {0, 0, 9} };
+	int arr[3][3] = { {77, 5, 12}, {22, 20, 1}, {1, 0, 9} };
 
 	cout << "Matrix 1: \n";
 	PrintMatrix(arr, 3, 3);
+	
+	int Number = 0;
 
-	if (IsSparseMatrix(arr, 3, 3)) {
-		cout << "Yes: It is Sparse Matrix \n";
+	cout << "Please enter the number to look for in matrix ? : ";
+	cin >> Number;
+	cout << endl;
+
+	if (IsNumberExists(arr, Number, 3, 3)) {
+		cout << "Yes it is there.";
 	}
 	else {
-		cout << "No: It is not Sparse Matrix \n";
+		cout << "No it is not there.";
 	}
-	
-	
+	cout << endl;
+
 	system("pause>0");
 }
