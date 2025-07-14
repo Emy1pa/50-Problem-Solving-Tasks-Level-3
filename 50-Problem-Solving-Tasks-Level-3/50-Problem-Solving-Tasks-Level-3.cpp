@@ -18,12 +18,12 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-bool CheckIfMatrixIsIdentity(int arr[3][3], short Rows, short Cols) {
+bool CheckIfMatrixIsScalar(int arr[3][3], short Rows, short Cols) {
+	int scalarNumber = arr[0][0];
 	for (int i = 0; i < Rows; i++)
 	{
-		for (int j = 0; j < Cols; j++)
-		{
-			if (i == j && arr[i][j] != 1) {
+		for (int j = 0; j < Cols; j++) {
+			if (i == j && arr[i][j] != scalarNumber) {
 				return false;
 			}
 			else if (i != j && arr[i][j] != 0) {
@@ -43,17 +43,17 @@ int main()
 {
 	srand((unsigned)time(NULL));
 
-	int arr[3][3] = { {1, 0, 0}, {0, 1, 0}, {0, 0, 1} };
+	int arr[3][3] = { {1, 0, 0}, {0, 9, 0}, {0, 0, 1} };
 
 	cout << "Matrix 1: \n";
 	PrintMatrix(arr, 3, 3);
 
 
-	if (CheckIfMatrixIsIdentity(arr, 3, 3)) {
-		cout << "\n Yes, Matrix is Identity \n";
+	if (CheckIfMatrixIsScalar(arr, 3, 3)) {
+		cout << "\n Yes, Matrix is Scalar \n";
 	}
 	else {
-		cout << "\n No, Matrix is not Identity \n";
+		cout << "\n No, Matrix is not Scalar \n";
 	}
 	system("pause>0");
 }
