@@ -5,7 +5,6 @@
 using namespace std;
 
 
-
 void PrintMatrix(int arr[3][3], short Rows, short Cols)
 {
 	for (short i = 0; i < Rows; i++)
@@ -18,31 +17,21 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-int getMaxNumber(int arr[3][3], short Rows, short Cols) {
-	int Max = 0;
-	for (int i = 0; i < Rows; i++)
+bool CheckIfPalindrome(int arr[3][3], short Rows, short Cols){
+	for (short i = 0; i < Rows; i++)
 	{
-		for (int j = 0; j < Cols; j++) {
-			if (arr[i][j] > Max) {
-				Max = arr[i][j];
+			if (arr[i][0] != arr[i][Cols - 1]) {
+				return false;
 			}
-		}
 	}
-	return Max;
+	return true;
 }
 
-int getMinimumNumber(int arr[3][3], short Rows, short Cols) {
-	int Min = arr[0][0];
-	for (int i = 0; i < Rows; i++)
-	{
-		for (int j = 0; j < Cols; j++) {
-			if (arr[i][j] < Min) {
-				Min = arr[i][j];
-			}
-		}
-	}
-	return Min;
-}
+
+
+
+
+
 
 
 
@@ -51,7 +40,7 @@ int getMinimumNumber(int arr[3][3], short Rows, short Cols) {
 int main()
 {
 
-	int arr[3][3] = { {77, 5, 12}, {22, 20, 6}, {14, 3, 9} };
+	int arr[3][3] = { {1, 2, 1}, {5, 5, 5}, {7, 3, 7} };
 
 
 	cout << "Matrix 1: \n";
@@ -59,13 +48,10 @@ int main()
 	
 	cout << endl;
 
-	cout << "Minimum Number is: ";
-	cout << getMinimumNumber(arr, 3, 3);
-
-	cout << endl << endl;
-
-	cout << "Maximum Number is: ";
-	cout << getMaxNumber(arr, 3, 3);
+	if (CheckIfPalindrome(arr, 3, 3))
+		cout << "Yes: Matrix is Palindrome \n";
+	else
+		cout << "No: Matrix is NOT Palindrome \n";
 
 	cout << endl;
 
