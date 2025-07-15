@@ -18,36 +18,32 @@ void PrintMatrix(int arr[3][3], short Rows, short Cols)
 	}
 }
 
-bool CheckNumberIfExistsInMatrix(int arr[3][3], int Number, short Rows, short Cols) {
+int getMaxNumber(int arr[3][3], short Rows, short Cols) {
+	int Max = 0;
 	for (int i = 0; i < Rows; i++)
 	{
 		for (int j = 0; j < Cols; j++) {
-			if (arr[i][j] == Number)
-				return true;
-		}
-	}
-	return false;
-}
-
-void IntersectedNumbers(int arr1[3][3], int arr2[3][3], short Rows, short Cols, int arrIntersect[9], int &arrIntLength) {
-	arrIntLength = 0;
-	for (int i = 0; i < Rows; i++)
-	{
-		for (int j = 0; j < Cols; j++) {
-			if (CheckNumberIfExistsInMatrix(arr2, arr1[i][j], Rows, Cols)) {
-				arrIntersect[arrIntLength] = arr1[i][j];
-				arrIntLength++;
+			if (arr[i][j] > Max) {
+				Max = arr[i][j];
 			}
 		}
 	}
+	return Max;
 }
 
-void PrintIntersectedNumbers(int arrIntersect[9], int arrIntLength) {
-	for (int i = 0; i < arrIntLength; i++)
+int getMinimumNumber(int arr[3][3], short Rows, short Cols) {
+	int Min = arr[0][0];
+	for (int i = 0; i < Rows; i++)
 	{
-		cout << arrIntersect[i] << "\t";
+		for (int j = 0; j < Cols; j++) {
+			if (arr[i][j] < Min) {
+				Min = arr[i][j];
+			}
+		}
 	}
+	return Min;
 }
+
 
 
 
@@ -55,26 +51,23 @@ void PrintIntersectedNumbers(int arrIntersect[9], int arrIntLength) {
 int main()
 {
 
-	int arr1[3][3] = { {77, 5, 12}, {22, 20, 1}, {1, 0, 9} };
-	int arr2[3][3] = { {5, 80, 90}, {22, 77, 1}, {10, 8, 33} };
+	int arr[3][3] = { {77, 5, 12}, {22, 20, 6}, {14, 3, 9} };
 
-	int arrIntersect[9] = {};
-	int arrIntLength = 0;
 
 	cout << "Matrix 1: \n";
-	PrintMatrix(arr1, 3, 3);
+	PrintMatrix(arr, 3, 3);
 	
 	cout << endl;
 
-	cout << "Matrix 2: \n";
-	PrintMatrix(arr2, 3, 3);
+	cout << "Minimum Number is: ";
+	cout << getMinimumNumber(arr, 3, 3);
 
-	IntersectedNumbers(arr1, arr2, 3, 3, arrIntersect, arrIntLength);
+	cout << endl << endl;
+
+	cout << "Maximum Number is: ";
+	cout << getMaxNumber(arr, 3, 3);
 
 	cout << endl;
-
-	cout << "Intersected Numbers are: \n";
-	PrintIntersectedNumbers(arrIntersect, arrIntLength);
 
 	system("pause>0");
 }
