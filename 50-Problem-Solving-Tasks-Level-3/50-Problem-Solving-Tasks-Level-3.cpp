@@ -4,20 +4,18 @@ using namespace std;
 
 
 
-void PrintFibonacciSeries(short Number){
+void PrintFibonacciSeries(short Number, int Prev1, int Prev2){
+	
 	int FebNumber = 0;
-
-	int Prev2 = 0, Prev1 = 1;
-
-	cout << "1   ";
-
-	for (short i = 2; i <= Number; i++) {
+	if (Number > 0) {
 		FebNumber = Prev2 + Prev1;
-		cout << FebNumber << "   ";
-
 		Prev2 = Prev1;
 		Prev1 = FebNumber;
+
+		cout << FebNumber << "    ";
+		PrintFibonacciSeries(Number - 1, Prev1, Prev2);
 	}
+	
 	
 }
 
@@ -26,6 +24,6 @@ void PrintFibonacciSeries(short Number){
 int main()
 {
 
-	PrintFibonacciSeries(10);
+	PrintFibonacciSeries(10, 0, 1);
 	system("pause>0");
 }
