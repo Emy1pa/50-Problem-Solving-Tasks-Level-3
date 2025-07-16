@@ -1,29 +1,34 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
-
-
-void PrintFibonacciSeries(short Number, int Prev1, int Prev2){
-	
-	int FebNumber = 0;
-	if (Number > 0) {
-		FebNumber = Prev2 + Prev1;
-		Prev2 = Prev1;
-		Prev1 = FebNumber;
-
-		cout << FebNumber << "    ";
-		PrintFibonacciSeries(Number - 1, Prev1, Prev2);
-	}
-	
-	
+string ReadStringText() {
+	string Text;
+	cout << "Please enter your String ?\n";
+	getline(cin, Text);
+	return Text;
 }
 
+void PrintFirstLetterOfEachWord(string Text){
+	cout << "First Letters of this string: \n\n";
+	for (int i = 0; i < Text.length(); i++){
+		if (i == 0) {
+			cout << Text[i] << endl;
+			}
+		else if(Text[i] == ' ') {
+				cout << Text[i + 1] << endl;
+			}
+		
+	}
+
+}
 
 
 int main()
 {
 
-	PrintFibonacciSeries(10, 0, 1);
+	string Text = ReadStringText();
+	PrintFirstLetterOfEachWord(Text);
 	system("pause>0");
 }
