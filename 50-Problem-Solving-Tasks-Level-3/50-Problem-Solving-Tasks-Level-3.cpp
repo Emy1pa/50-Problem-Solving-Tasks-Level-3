@@ -10,11 +10,11 @@ string ReadStringText() {
 	return Text;
 }
 
-string UppercaseFirstLetterOfEachWord(string Text){
+string LowerCaseFirstLetterOfEachWord(string Text){
 	bool IsFirstLetter = true;
 	for (int i = 0; i < Text.length(); i++){
 		if (Text[i] != ' ' && IsFirstLetter) {
-			Text[i] = toupper(Text[i]);
+			Text[i] = tolower(Text[i]);
 		}
 		IsFirstLetter = (Text[i] == ' ' ? true : false);
 	}
@@ -24,10 +24,12 @@ string UppercaseFirstLetterOfEachWord(string Text){
 
 
 
+
 int main()
 {
 
 	string Text = ReadStringText();
-	cout << UppercaseFirstLetterOfEachWord(Text);
+	cout << "String After Conversion: \n";
+	cout << LowerCaseFirstLetterOfEachWord(Text);
 	system("pause>0");
 }
