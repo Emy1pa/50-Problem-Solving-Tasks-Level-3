@@ -1,59 +1,31 @@
 #include <iostream>
-#include <cstdlib>
-#include <iomanip>
 
 using namespace std;
 
 
-void PrintMatrix(int arr[3][3], short Rows, short Cols)
-{
-	for (short i = 0; i < Rows; i++)
-	{
-		for (short j = 0; j < Cols; j++)
-		{
-			cout << setw(3) << arr[i][j] << " ";
-		}
-		cout << "\n";
+
+void PrintFibonacciSeries(short Number){
+	int FebNumber = 0;
+
+	int Prev2 = 0, Prev1 = 1;
+
+	cout << "1   ";
+
+	for (short i = 2; i <= Number; i++) {
+		FebNumber = Prev2 + Prev1;
+		cout << FebNumber << "   ";
+
+		Prev2 = Prev1;
+		Prev1 = FebNumber;
 	}
+	
 }
-
-bool CheckIfPalindrome(int arr[3][3], short Rows, short Cols){
-	for (short i = 0; i < Rows; i++)
-	{
-			if (arr[i][0] != arr[i][Cols - 1]) {
-				return false;
-			}
-	}
-	return true;
-}
-
-
-
-
-
-
-
-
 
 
 
 int main()
 {
 
-	int arr[3][3] = { {1, 2, 1}, {5, 5, 5}, {7, 3, 7} };
-
-
-	cout << "Matrix 1: \n";
-	PrintMatrix(arr, 3, 3);
-	
-	cout << endl;
-
-	if (CheckIfPalindrome(arr, 3, 3))
-		cout << "Yes: Matrix is Palindrome \n";
-	else
-		cout << "No: Matrix is NOT Palindrome \n";
-
-	cout << endl;
-
+	PrintFibonacciSeries(10);
 	system("pause>0");
 }
