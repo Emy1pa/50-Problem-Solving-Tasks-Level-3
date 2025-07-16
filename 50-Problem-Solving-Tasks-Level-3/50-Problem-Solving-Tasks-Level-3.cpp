@@ -3,49 +3,33 @@
 #include <cctype>
 using namespace std;
 
-string ReadStringText() {
-	string Text;
-	cout << "Please enter your String ?\n";
-	getline(cin, Text);
-	return Text;
+char ReadCharLetter() {
+	char Letter;
+	cout << "Please enter a character ?\n";
+	cin >> Letter;
+	return Letter;
 }
 
-string LowerCaseAllString(string Text){
-	bool IsFirstLetter = true;
-	for (int i = 0; i < Text.length(); i++){
-		
-			Text[i] = tolower(Text[i]);
-		}
-	return Text;
 
+char InvertCase(char Character){
+	if (isupper(Character))
+		return tolower(Character);
+	else
+		return toupper(Character);
 }
-
-string UpperCaseAllString(string Text) {
-	bool IsFirstLetter = true;
-	for (int i = 0; i < Text.length(); i++) {
-
-		Text[i] = toupper(Text[i]);
-	}
-	return Text;
-
-}
-
 
 
 
 int main()
 {
 
-	string Text = ReadStringText();
+	char Letter = ReadCharLetter();
 
 	cout << endl;
 
-	cout << "String After Upper: \n";
-	cout << UpperCaseAllString(Text) << endl;
+	cout << "Character after inverting case: \n";
 
-	cout << endl;
-
-	cout << "String After Lower: \n";
-	cout << LowerCaseAllString(Text) << endl;
+	cout << InvertCase(Letter) << endl;
+	
 	system("pause>0");
 }
