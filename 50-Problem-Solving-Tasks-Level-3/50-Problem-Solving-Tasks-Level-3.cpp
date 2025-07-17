@@ -20,15 +20,13 @@ bool CheckIfIsVowel(char Letter){
 
 }
 
-int CheckNumberOfVowels(string Text){
-	int Counter = 0;
+void PrintAllVowels(string Text){
 	for (int i = 0; i < Text.length(); i++)
 	{
 		if (CheckIfIsVowel(Text[i])) {
-			Counter++;
+			cout << Text[i] << " ";
 		}
 	}
-	return Counter;
 }
 
 
@@ -39,9 +37,10 @@ int main()
 	string Text = ReadText();
 
 	cout << endl;
-	cout << "Number of vowels is: " << CheckNumberOfVowels(Text);
-	
+	cout << "Vowels in string are: \n";
+	PrintAllVowels(Text);
 
+	cout << endl;
 	
 	
 	system("pause>0");
