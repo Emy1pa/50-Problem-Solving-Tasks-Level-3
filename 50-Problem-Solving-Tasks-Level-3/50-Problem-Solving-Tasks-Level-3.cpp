@@ -5,56 +5,41 @@
 using namespace std;
 
 
-string ReadTextString() {
-	string Text;
-	cout << "Please enter your string ?\n";
-	getline(cin, Text);
-	return Text;
+char ReadCharacter() {
+	char Letter;
+	cout << "Please enter a Character ?\n";
+	cin >> Letter;
+	return Letter;
 }
 
-
-int CountString(string Text, short Char){
-	int Counter = 0;
-	for (int i = 0; i < Text.length(); i++)
-	{
-		if (Text[i] == Char) {
-			Counter++;
-		}
+char InvertLetter(char Letter) {
+	if (isupper(Letter)) {
+		return tolower(Letter);
 	}
-	return Counter;
 }
 
-int CountUpperOrLowerLetter(string Text, short Char){
-	int Counter = 0;
 
-	for (int i = 0; i < Text.length(); i++)
-	{
-		if (Text[i] == Char || Text[i] == toupper(Char)) {
-			Counter++;
-		}
-	}
-	return Counter;
+bool CheckIfIsVowel(char Letter){
+	if (InvertLetter(Letter) == 'a' || Letter == 'e' || Letter ==  'i' || Letter == 'o' || Letter == 'u')
+		return true;
+	else
+		return false;
+
 }
-
 
 
 
 int main()
 {
 
-	string Text = ReadTextString();
+	char Letter = ReadCharacter();
 
-	cout << endl;
+	if (CheckIfIsVowel(Letter)) 
+		cout << "Yes Letter \'" << Letter << "\' is a vowel";
+	else
+		cout << "No Letter \'" << Letter << "\' is not a vowel";
 
-	char CharToSearchFor;
-
-	cout << "Please enter a character ? \n";
-	cin >> CharToSearchFor;
-
-	cout << "Letter \'" << CharToSearchFor << "\' Count = " << CountString(Text, CharToSearchFor) << endl;
-
-	char UpperCaseLetter = toupper(CharToSearchFor);
-	cout << "Letter \'" << CharToSearchFor << "\' Or \'" << UpperCaseLetter << "\' Count = " << CountUpperOrLowerLetter(Text, CharToSearchFor) << endl;
+	
 	
 	system("pause>0");
 }
