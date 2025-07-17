@@ -1,21 +1,28 @@
 #include <iostream>
 #include <string>
 #include <cctype>
+
 using namespace std;
 
-char ReadCharLetter() {
-	char Letter;
-	cout << "Please enter a character ?\n";
-	cin >> Letter;
-	return Letter;
+string ReadTextString() {
+	string Text;
+	cout << "Please enter your string ?\n";
+	getline(cin, Text);
+	return Text;
 }
 
 
-char InvertCase(char Character){
-	if (isupper(Character))
-		return tolower(Character);
-	else
-		return toupper(Character);
+string InvertAllLettersCase(string Text){
+	for (int i = 0; i < Text.length(); i++)
+	{
+		if (isupper(Text[i])) {
+			Text[i] = tolower(Text[i]);
+		}
+		else {
+			Text[i] = toupper(Text[i]);
+		}
+	}
+	return Text;
 }
 
 
@@ -23,13 +30,13 @@ char InvertCase(char Character){
 int main()
 {
 
-	char Letter = ReadCharLetter();
+	string Text = ReadTextString();
 
 	cout << endl;
 
-	cout << "Character after inverting case: \n";
+	cout << "String after Inverting All Letters Case \n";
 
-	cout << InvertCase(Letter) << endl;
+	cout << InvertAllLettersCase(Text);
 	
 	system("pause>0");
 }
