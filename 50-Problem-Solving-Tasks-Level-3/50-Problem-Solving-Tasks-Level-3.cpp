@@ -24,6 +24,18 @@ int CountString(string Text, short Char){
 	return Counter;
 }
 
+int CountUpperOrLowerLetter(string Text, short Char){
+	int Counter = 0;
+
+	for (int i = 0; i < Text.length(); i++)
+	{
+		if (Text[i] == Char || Text[i] == toupper(Char)) {
+			Counter++;
+		}
+	}
+	return Counter;
+}
+
 
 
 
@@ -40,6 +52,9 @@ int main()
 	cin >> CharToSearchFor;
 
 	cout << "Letter \'" << CharToSearchFor << "\' Count = " << CountString(Text, CharToSearchFor) << endl;
+
+	char UpperCaseLetter = toupper(CharToSearchFor);
+	cout << "Letter \'" << CharToSearchFor << "\' Or \'" << UpperCaseLetter << "\' Count = " << CountUpperOrLowerLetter(Text, CharToSearchFor) << endl;
 	
 	system("pause>0");
 }
