@@ -12,22 +12,21 @@ string ReadText() {
 	return Text;
 }
 
-
-
-bool CheckIfIsVowel(char Letter){
-	Letter = tolower(Letter);
-	return ((Letter == 'a') || (Letter == 'e') || (Letter == 'i') || (Letter == 'o') || (Letter == 'u'));
-
-}
-
-void PrintAllVowels(string Text){
+void PrintStringWord(string Text){
 	for (int i = 0; i < Text.length(); i++)
 	{
-		if (CheckIfIsVowel(Text[i])) {
-			cout << Text[i] << " ";
+		if (Text[i] == ' ') {
+			cout << endl;
+		} 
+		else {
+			cout << Text[i];
 		}
 	}
 }
+
+
+
+
 
 
 
@@ -37,8 +36,10 @@ int main()
 	string Text = ReadText();
 
 	cout << endl;
-	cout << "Vowels in string are: \n";
-	PrintAllVowels(Text);
+	
+	cout << "Your string words are: " << endl;
+
+	PrintStringWord(Text);
 
 	cout << endl;
 	
