@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cctype>
+#include <vector>
 
 using namespace std;
 
@@ -12,46 +13,65 @@ string ReadText() {
 	return Text;
 }
 
-int PrintCounterOfWordInString(string Text){
-	int Counter = 0;
-	string delim = " ";
+//int PrintCounterOfWordInString(string Text){
+//	int Counter = 0;
+//	string delim = " ";
+//	short pos = 0;
+//
+//	string sWord;
+//
+//	while((pos = Text.find(delim)) != std::string::npos){
+//		sWord = Text.substr(0, pos);
+//		if (sWord != "") {
+//			Counter++;
+//		}
+//		Text.erase(0, pos + delim.length());
+//	}
+//	if (Text != "") {
+//		cout << Text << endl;
+//		Counter++;
+//	}
+//	return Counter;
+//
+//}
+
+vector <string> Split(string Text, string Delim){
 	short pos = 0;
-
 	string sWord;
-
-	while((pos = Text.find(delim)) != std::string::npos){
+	vector <string> vWord;
+	while ((pos = Text.find(Delim)) != std::string::npos) {
 		sWord = Text.substr(0, pos);
 		if (sWord != "") {
-			Counter++;
+			vWord.push_back(sWord);
 		}
-		Text.erase(0, pos + delim.length());
+		Text.erase(0, pos + Delim.length());
 	}
 	if (Text != "") {
-		cout << Text << endl;
-		Counter++;
+		vWord.push_back(Text);
 	}
-	return Counter;
+	return vWord;
 
 }
-
-
-
-
-
-
-
-
 
 int main()
 {
 
 	string Text = ReadText();
 
-	cout << endl;
-	
+	vector <string> vWord;
 
-	cout << "The number of words in your string is: " << PrintCounterOfWordInString(Text);
-	
+	vWord = Split(Text, " ");
+
+	cout << endl;
+
+	cout << "Tokens = " << vWord.size() << endl;
+
+	cout << endl;
+
+	for (string &Word : vWord) {
+		cout << Word << endl;
+	}
+	cout << endl;
 	
 	system("pause>0");
 }
