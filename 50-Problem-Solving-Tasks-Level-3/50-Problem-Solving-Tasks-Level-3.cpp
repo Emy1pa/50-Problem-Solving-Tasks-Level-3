@@ -13,65 +13,45 @@ string ReadText() {
 	return Text;
 }
 
-//int PrintCounterOfWordInString(string Text){
-//	int Counter = 0;
-//	string delim = " ";
-//	short pos = 0;
-//
-//	string sWord;
-//
-//	while((pos = Text.find(delim)) != std::string::npos){
-//		sWord = Text.substr(0, pos);
-//		if (sWord != "") {
-//			Counter++;
-//		}
-//		Text.erase(0, pos + delim.length());
-//	}
-//	if (Text != "") {
-//		cout << Text << endl;
-//		Counter++;
-//	}
-//	return Counter;
-//
-//}
-
-vector <string> Split(string Text, string Delim){
-	short pos = 0;
-	string sWord;
-	vector <string> vWord;
-	while ((pos = Text.find(Delim)) != std::string::npos) {
-		sWord = Text.substr(0, pos);
-		if (sWord != "") {
-			vWord.push_back(sWord);
+string LeftSpaceTrim(string Text){
+	for (int i = 0; i < Text.length(); i++)
+	{
+		if(Text[i] != ' ' ) {
+			return Text.substr(i, Text.length() - i);
 		}
-		Text.erase(0, pos + Delim.length());
 	}
-	if (Text != "") {
-		vWord.push_back(Text);
-	}
-	return vWord;
-
+	return "";
 }
+
+string RightSpaceTrim(string Text) {
+	for (int i = Text.length() - 1; i >= 0; i--)
+	{
+		if (Text[i] != ' ') {
+			return Text.substr(0, i + 1);
+		}
+	}
+	return "";
+}
+
+string Trim(string Text){
+	return LeftSpaceTrim(RightSpaceTrim(Text));
+}
+
 
 int main()
 {
 
 	string Text = ReadText();
 
-	vector <string> vWord;
+	cout << "Trim Left: " << LeftSpaceTrim(Text) << endl;
+	cout << "Trim Right: " << RightSpaceTrim(Text) << endl;
+	cout << "Trim: " << Trim(Text) << endl;
 
-	vWord = Split(Text, " ");
-
-	cout << endl;
-
-	cout << "Tokens = " << vWord.size() << endl;
 
 	cout << endl;
 
-	for (string &Word : vWord) {
-		cout << Word << endl;
-	}
-	cout << endl;
+
+	
 	
 	system("pause>0");
 }
