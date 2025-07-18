@@ -12,17 +12,29 @@ string ReadText() {
 	return Text;
 }
 
-void PrintStringWord(string Text){
-	for (int i = 0; i < Text.length(); i++)
-	{
-		if (Text[i] == ' ') {
-			cout << endl;
-		} 
-		else {
-			cout << Text[i];
+int PrintCounterOfWordInString(string Text){
+	int Counter = 0;
+	string delim = " ";
+	short pos = 0;
+
+	string sWord;
+
+	while((pos = Text.find(delim)) != std::string::npos){
+		sWord = Text.substr(0, pos);
+		if (sWord != "") {
+			Counter++;
 		}
+		Text.erase(0, pos + delim.length());
 	}
+	if (Text != "") {
+		cout << Text << endl;
+		Counter++;
+	}
+	return Counter;
+
 }
+
+
 
 
 
@@ -37,11 +49,8 @@ int main()
 
 	cout << endl;
 	
-	cout << "Your string words are: " << endl;
 
-	PrintStringWord(Text);
-
-	cout << endl;
+	cout << "The number of words in your string is: " << PrintCounterOfWordInString(Text);
 	
 	
 	system("pause>0");
