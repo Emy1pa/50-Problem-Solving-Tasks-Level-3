@@ -5,39 +5,17 @@
 using namespace std;
 
 
-vector <string> SplitString(string S1, string Delim){
-	vector <string> vString;
-	short pos = 0;
-	string sWord;
-	while((pos = S1.find(Delim)) != std::string::npos){
-		sWord = S1.substr(0, pos);
-		if (sWord != "") {
-			vString.push_back(sWord);
-		}
-		S1.erase(0, pos + Delim.length());
+
+
+
+string ReplaceWordInStringUsingBuiltInFunction(string S1, string StringToReplace, string sReplace){
+	short pos = S1.find(StringToReplace);
+	while (pos != std::string::npos) {
+		S1 = S1.replace(pos, StringToReplace.length(), sReplace);
+		pos = S1.find(StringToReplace);
 	}
-	if (S1 != "") {
-		vString.push_back(S1);
-	}
-	return vString;
+	return S1;
 }
-
-vector <string> ReplaceString(string S1, string OriginalWord, string ReplacableWord) {
-	vector <string> vString;
-	vString = SplitString(S1, " ");
-
-	for (int i = 0; i < vString.size(); i++)
-	{
-		if (vString[i] == OriginalWord) {
-			vString[i] = ReplacableWord;
-		}
-	}
-	return vString;
-}
-
-
-
-
 
 
 
@@ -47,14 +25,13 @@ int main()
 {
 	string S1 = "Welcome To Jordan , Jordan is a nice country";
 
-	vector <string> ReplacedString = ReplaceString(S1, "Jordan", "USA");
-	cout << "Original String \n";
-	cout << S1 << endl;
+	string StringToReplace = "Jordan";
+	string ReplaceTo = "USA";
 
-	cout << "String After Replace: \n";
-	for (string& Word : ReplacedString) {
-		cout << Word << " ";
-	}
+	cout << "\n Original String \n" << S1;
+
+	cout << "\n\n String after Replace: ";
+	cout << "\n" << ReplaceWordInStringUsingBuiltInFunction(S1, StringToReplace, ReplaceTo) << endl;
 	
 	system("pause>0");
 }
