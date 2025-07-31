@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="50-Problem-Solving-Tasks-Level-3.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="RandomLib.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
