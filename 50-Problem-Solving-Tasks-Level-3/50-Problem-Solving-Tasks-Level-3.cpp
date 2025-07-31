@@ -5,23 +5,44 @@
 using namespace std;
 
 
-string JoinString(vector <string> vString, string Delim){
-	string JoinStrings = "";
-
-	for (string& S : vString) {
-		JoinStrings = JoinStrings + S + Delim;
-	}
-	return JoinStrings.substr(0, JoinStrings.length() - Delim.length());
+string ReadString() {
+	string S1;
+	cout << "Please Enter Your String ? \n";
+	getline(cin, S1);
+	return S1;
 }
 
-string JoinString(string arrString[], short Length, string Delim) {
-	string JoinStrings = "";
-
-	for (int i = 0; i < Length; i++)
-	{
-		JoinStrings = JoinStrings + arrString[i]+ Delim;
+vector <string> SplitString(string S1, string Delim){
+	vector <string> vString;
+	short pos = 0;
+	string sWord;
+	while((pos = S1.find(Delim)) != std::string::npos){
+		sWord = S1.substr(0, pos);
+		if (sWord != "") {
+			vString.push_back(sWord);
+		}
+		S1.erase(0, pos + Delim.length());
 	}
-	return JoinStrings.substr(0, JoinStrings.length() - Delim.length());
+	if (S1 != "") {
+		vString.push_back(S1);
+	}
+	return vString;
+}
+
+string ReverseString(string S1){
+	vector <string> vString;
+	string S2 = "";
+
+	vString = SplitString(S1, " ");
+	vector <string>::iterator iter = vString.end();
+
+	while(iter != vString.begin()){
+		--iter;
+		S2 += *iter + " ";
+	}
+	S2 = S2.substr(0, S2.length() - 1);
+	return S2;
+
 }
 
 
@@ -32,16 +53,8 @@ string JoinString(string arrString[], short Length, string Delim) {
 
 int main()
 {
-	
-	vector <string> vString = { "Mohammed", "Faid", "Ali", "Maher" };
-	string arrString[] = { "Mohammed", "Faid", "Ali", "Maher" };
-	cout << "\nVector after join: \n";
-
-	cout << JoinString(vString, " ");
-
-	cout << "\nArray after join: \n";
-
-	cout << JoinString(arrString, 4, " ");
-
+	string S1 = ReadString();
+	cout << "String after reversing words: \n";
+	cout << ReverseString(S1) << endl;
 	system("pause>0");
 }
