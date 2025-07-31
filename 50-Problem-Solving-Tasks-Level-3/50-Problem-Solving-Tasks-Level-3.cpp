@@ -5,13 +5,6 @@
 using namespace std;
 
 
-string ReadString() {
-	string S1;
-	cout << "Please Enter Your String ? \n";
-	getline(cin, S1);
-	return S1;
-}
-
 vector <string> SplitString(string S1, string Delim){
 	vector <string> vString;
 	short pos = 0;
@@ -29,21 +22,20 @@ vector <string> SplitString(string S1, string Delim){
 	return vString;
 }
 
-string ReverseString(string S1){
+vector <string> ReplaceString(string S1, string OriginalWord, string ReplacableWord) {
 	vector <string> vString;
-	string S2 = "";
-
 	vString = SplitString(S1, " ");
-	vector <string>::iterator iter = vString.end();
 
-	while(iter != vString.begin()){
-		--iter;
-		S2 += *iter + " ";
+	for (int i = 0; i < vString.size(); i++)
+	{
+		if (vString[i] == OriginalWord) {
+			vString[i] = ReplacableWord;
+		}
 	}
-	S2 = S2.substr(0, S2.length() - 1);
-	return S2;
-
+	return vString;
 }
+
+
 
 
 
@@ -53,8 +45,16 @@ string ReverseString(string S1){
 
 int main()
 {
-	string S1 = ReadString();
-	cout << "String after reversing words: \n";
-	cout << ReverseString(S1) << endl;
+	string S1 = "Welcome To Jordan , Jordan is a nice country";
+
+	vector <string> ReplacedString = ReplaceString(S1, "Jordan", "USA");
+	cout << "Original String \n";
+	cout << S1 << endl;
+
+	cout << "String After Replace: \n";
+	for (string& Word : ReplacedString) {
+		cout << Word << " ";
+	}
+	
 	system("pause>0");
 }
