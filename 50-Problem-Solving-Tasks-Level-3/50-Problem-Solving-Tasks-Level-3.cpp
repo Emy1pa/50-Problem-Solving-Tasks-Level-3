@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
+
 
 using namespace std;
 
@@ -12,54 +14,62 @@ struct stClientData {
 	int AccountBalance = 0;
 };
 
-
-vector <string> SplitString(string S1, string Delim){
-	int pos = 0;
-	vector <string> vClientData;
-	string sWord = "";
-	while((pos = S1.find(Delim)) != std::string::npos){
-		sWord = S1.substr(0, pos);
-		if (sWord != "") {
-			vClientData.push_back(sWord);
-		}
-		S1.erase(0, pos + Delim.length());
-	}
-	if (S1 != "") {
-		vClientData.push_back(S1);
-	}
-	return vClientData;
-
-}
-
-stClientData ConvertLineToRecord(string Line, string Seperator = "#//#") {
-	vector <string> vClientData = SplitString(Line, Seperator);
+stClientData ReadClientData() {
 	stClientData ClientData;
-	ClientData.AccountNumber = vClientData[0];
-	ClientData.PinCode = vClientData[1];
-	ClientData.ClientName = vClientData[2];
-	ClientData.Phone = vClientData[3];
-	ClientData.AccountBalance = stod(vClientData[4]);
+	cout << "Enter Account Number? ";
+	cin.ignore(1, '/n');
+	getline(cin, ClientData.AccountNumber);
+	cout << "Enter PinCode? ";
+	getline(cin, ClientData.PinCode);
+	cout << "Enter Name? ";
+	getline(cin, ClientData.ClientName);
+	cout << "Enter Phone? ";
+	getline(cin, ClientData.Phone);
+	cout << "Enter Account Balance? ";
+	cin >> ClientData.AccountBalance;
 	return ClientData;
 }
 
-void PrintClientRecord(stClientData Client)
-{
-	cout << "\n\nThe following is the extracted client record : \n\n";
-	cout << "Account Number : " << Client.AccountNumber << endl;
-	cout << "PinCode : " << Client.PinCode << endl;
-	cout << "Name : " << Client.ClientName << endl;
-	cout << "Phone : " << Client.Phone << endl;
-	cout << "Account Balance : " << Client.AccountBalance << endl;
+string ConvertRecordToLine(stClientData ClientData, string Seperator = "#//#") {
+	string RecordLine = "";
+	RecordLine += ClientData.AccountNumber + Seperator;
+	RecordLine += ClientData.PinCode + Seperator;
+	RecordLine += ClientData.ClientName + Seperator;
+	RecordLine += ClientData.Phone + Seperator;
+	RecordLine += to_string(ClientData.AccountBalance);
+	return RecordLine;
 }
+
+void AddStringToFile(string Line){
+
+	fstream MyFile;
+
+	MyFile.open("ClientFile", ios::app);
+	if (MyFile.is_open()) {
+		MyFile << Line << endl;
+	}
+	MyFile.close();
+}
+
+void KeepAddingClients(){
+	char AddMore = 'Y';
+	do
+	{
+		stClientData ClientData = ReadClientData();
+		string ConvertToLine = ConvertRecordToLine(ClientData);
+		AddStringToFile(ConvertToLine);
+		cout << "Client Added Successfully, do you want to add more clients ? ";
+		cin >> AddMore;
+	} while (AddMore == 'Y' || AddMore == 'y');
+}
+
+
 
 
 int main()
 {
-	string RecordLine = "A150#//#1234#//#Imane Souaouti#//#0670066444#//#20000";
-	cout << "Line Record is: \n";
-	cout << RecordLine << endl;
-	cout << "The following is the extracted client record: \n";
-	stClientData ClientData = ConvertLineToRecord(RecordLine);
-	PrintClientRecord(ClientData);
+	
+	cout << "Adding New Client: \n\n";
+	KeepAddingClients();
 	system("pause>0");
 }
