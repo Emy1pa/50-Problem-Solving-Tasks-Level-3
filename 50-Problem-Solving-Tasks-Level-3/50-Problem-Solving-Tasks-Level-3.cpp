@@ -77,6 +77,7 @@ void DisplayClientData(vector <stClientData> ClientData){
 
 void DisplayFinalResults(){
 	vector <stClientData> ClientData = ReadFileContent();
+	cout << "\t\t\t\t\tClient List (" << ClientData.size() << ") Client(s). \n";
 	DisplayClientData(ClientData);
 
 }
