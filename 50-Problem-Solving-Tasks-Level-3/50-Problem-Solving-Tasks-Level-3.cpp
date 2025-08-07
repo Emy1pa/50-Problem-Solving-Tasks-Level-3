@@ -1,5 +1,5 @@
-#include <iostream>;
-#include <iomanip>;
+#include <iostream>
+#include <iomanip>
 #include <string>
 #include <vector>
 #include <fstream>
@@ -13,7 +13,7 @@ struct stClient
 	string Name = "";
 	string Phone = "";
 	int AccountBalance = 0;
-	bool MarkForDelete = false;
+	bool MarkForUpdate = false;
 };
 
 vector <string> SplitString(string S9, string Delim)
@@ -115,23 +115,45 @@ string ReadClientAccountNumber()
 }
 
 
-bool MarkClientForDeleteByAccountNumber(string AccountNumber, vector <stClient> &vClients ){
+bool MarkClientForUpdateByAccountNumber(string AccountNumber, vector <stClient> &vClients ){
 	for (stClient& C : vClients) {
 		if (C.AccountNumber == AccountNumber) {
-			C.MarkForDelete = true;
+			C.MarkForUpdate = true;
 			return true;
 		}
 	}
 	return false;
 }
 
+stClient ReadClientData() {
+	stClient ClientData;
+	cout << "Enter Account Number? ";
+	cin.ignore(1, '/n');
+	getline(cin, ClientData.AccountNumber);
+	cout << "Enter PinCode? ";
+	getline(cin, ClientData.PinCode);
+	cout << "Enter Name? ";
+	getline(cin, ClientData.Name);
+	cout << "Enter Phone? ";
+	getline(cin, ClientData.Phone);
+	cout << "Enter Account Balance? ";
+	cin >> ClientData.AccountBalance;
+	return ClientData;
+
+	}
+
 vector <stClient> SaveClientsDataToFile(string FileName, vector <stClient> vClients){
 	fstream MyFile;
 	MyFile.open(FileName, ios::out);
 	string DataLine;
 	if (MyFile.is_open()) {
-		for (stClient C : vClients) {
-			if (C.MarkForDelete == false) {
+		for (stClient &C : vClients) {
+			if (C.MarkForUpdate == true) {
+				C = ReadClientData();
+				DataLine = ConvertRecordToLine(C);
+				MyFile << DataLine << endl;
+			}
+			else {
 				DataLine = ConvertRecordToLine(C);
 				MyFile << DataLine << endl;
 			}
@@ -141,20 +163,20 @@ vector <stClient> SaveClientsDataToFile(string FileName, vector <stClient> vClie
 	return vClients;
 }
 
-bool DeleteClientsByAccountNumber(string AccountNumber, vector <stClient>& vClients){
+bool UpdateClientByAccountNumber(string AccountNumber, vector <stClient>& vClients){
 	stClient Client;
 	char Answer = 'n';
 
 	if (FindClientByAccountNumber(AccountNumber, vClients, Client)) {
 		PrintClientRecord(Client);
 
-		cout << "\n\nAre you sure you want delete client ? n/y ?";
+		cout << "\n\nAre you sure you want update this client ? n/y ?";
 		cin >> Answer;
 		if (Answer == 'y' || Answer == 'Y') {
-			MarkClientForDeleteByAccountNumber(AccountNumber, vClients);
+			MarkClientForUpdateByAccountNumber(AccountNumber, vClients);
 			SaveClientsDataToFile(ClientsFileName, vClients);
 			vClients = LoadClientsDataFromFile(ClientsFileName);
-			cout << "\n\n Client Deleted Successfully. \n";
+			cout << "\n\n Client Updated Successfully. \n";
 			return true;
 		}
 	}
@@ -169,6 +191,6 @@ int main()
 {
 	vector <stClient> vClients = LoadClientsDataFromFile(ClientsFileName);
 	string AccountNumber = ReadClientAccountNumber();
-	DeleteClientsByAccountNumber(AccountNumber, vClients);
+	UpdateClientByAccountNumber(AccountNumber, vClients);
 	system("pause>0");
 }
